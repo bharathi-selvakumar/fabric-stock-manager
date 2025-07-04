@@ -91,22 +91,36 @@ Make sure the frontend Axios base URL matches backend EC2 IP:
 
 
 axios.get('http://<EC2-PUBLIC-IP>:3001/api/fabrics');
+
 🛡️ AWS Security & Network Setup
 🔹 VPC Design
-Component	CIDR Block	Description
-VPC	10.0.0.0/16	Custom VPC
-Public Subnet	10.0.1.0/24	EC2 + NAT Gateway
-Private Subnet	10.0.2.0/24	RDS
+Component: VPC
+CIDR Block: 10.0.0.0/16
+Description: Custom VPC
+
+Component: Public Subnet
+CIDR Block: 10.0.1.0/24
+Description: EC2 + NAT Gateway
+
+Component: Private Subnet
+CIDR Block: 10.0.2.0/24
+Description: RDS
 
 🔹 Security Groups
-Resource	Port	Source
-EC2	22	Your IP
-EC2	3001	Your IP or 0.0.0.0/0 (dev only)
-RDS	5432	EC2's SG ID
+Resource: EC2
+Port: 22
+Source: Your IP
+
+Resource: EC2
+Port: 3001
+Source: Your IP or 0.0.0.0/0 (for development only)
+
+Resource: RDS
+Port: 5432
+Source: EC2's Security Group ID
 
 🔍 Testing API
 Test the backend directly:
-
 
 curl http://<EC2-PUBLIC-IP>:3001/api/fabrics
 Or use Postman for full CRUD testing.
